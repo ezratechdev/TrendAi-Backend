@@ -4,26 +4,43 @@ import http from "http";
 import mongoose from "mongoose";
 import helmet from "helmet";
 import dotenv from 'dotenv';
-
+import cors from "cors";
 // Packages
 import { logger } from "./functions/logger";
 import authenication_router from "./routes/authenication";
 import brand_router from "./routes/brand";
 
-// Project configurations
+/**
+ * TODO - LOCK CORS APP LINK TO THE DOMAIN OF THE FRONTEND
+ */
+
+// Global project configurations
 dotenv.config();
 
 // Defining constants
 const PORT = process.env.PORT || process.env.server_port;
 const express_app = express();
 const server = http.createServer(express_app);
+var whitelist = ['http://example1.com', 'http://example2.com']
+var corsOptions = {
+  origin: function (origin:any, callback:any) {
 
+    return callback(null, true);
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+ 
 
 
 // Configuring middlewares
 express_app.use(express.json());
 express_app.use(express.urlencoded({ extended : true }));
 express_app.use(helmet());
+express_app.use(cors(corsOptions))
 
 // Routes
 express_app.use('/authenication', authenication_router);
