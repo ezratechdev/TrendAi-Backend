@@ -39,6 +39,7 @@ async function createCampaign(req:Request, res:Response){
     .json({
         message:'Campaign created',
         campaignID: newCampaign._id,
+        newCampaign,
     })
 }
 
