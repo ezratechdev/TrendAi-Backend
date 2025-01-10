@@ -50,7 +50,7 @@ const schema = new mongoose.Schema({
     }],
     status: {
         type: String,
-        enum: ['Active', 'Completed', 'Pending'],
+        enum: ['Active', 'Completed', 'Pending','Rejected'],
         default: 'Pending',
     },
     deadline: {
