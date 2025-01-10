@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const signToken = (data: { id: any, operation: string }) => {
     // you can change the expires in time to as required
-    return jwt.sign({ ...data }, `${process.env.jwt_secret}`, { expiresIn: '1h' });
+    return jwt.sign({ ...data }, `${process.env.jwt_secret}`, { expiresIn: '20h' });
 }
 
 function isTokenExpired(token: string) {
