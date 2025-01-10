@@ -2,7 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "./jwt";
 
 export default function verifyTokenMiddleWare(req:Request, res:Response, next:NextFunction){
-    const { token } = req.body;
+    if(!(req.headers && req.headers.authorization && req.headers.authorization.includes('Bearer'))){
+        throw new Error(`Authorization token not found`);
+    }
+    const token = req.headers.authorization.split(" ")[1];
     if(!token) throw new Error(`Token not passed`);
     const tokenData:any = verifyToken(token);
 
