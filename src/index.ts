@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 // Packages
 import { logger } from "./functions/logger";
 import authenication_router from "./routes/authenication";
+import brand_router from "./routes/brand";
 
 // Project configurations
 dotenv.config();
@@ -25,7 +26,8 @@ express_app.use(express.urlencoded({ extended : true }));
 express_app.use(helmet());
 
 // Routes
-express_app.use('/authenication', authenication_router)
+express_app.use('/authenication', authenication_router);
+express_app.use('/brand', brand_router);
 
 // Status check route
 express_app.get('/status', function(_,  res){

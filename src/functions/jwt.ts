@@ -14,8 +14,8 @@ function isTokenExpired(token: string) {
     return expired
 }
 
-export const verifyToken = (token: any, secKey: string) => {
-    if (!(token && secKey)) throw new Error(`Invalid data passed`);
+export const verifyToken = (token: any) => {
+    if (!(token)) throw new Error(`Invalid data passed`);
     if (isTokenExpired(token)) throw new Error(`This token has expired`)
     else return jwt.verify(token, `${process.env.jwt_secret}`);
 }
